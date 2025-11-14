@@ -41,7 +41,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zonuexe/vitepress-slides.git"
+    "url": "git+https://github.com/zonuexe/vitepress-slides.git"
   },
   "peerDependencies": {
     "vitepress": "^1.0.0",
