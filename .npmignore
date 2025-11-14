@@ -1,0 +1,7 @@
+src/
+vite.config.js
+node_modules/
+*.log
+.DS_Store
+dist/types/
+
