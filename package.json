@@ -1,24 +1,14 @@
 {
   "name": "@zonuexe/vitepress-slides",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "VitePress plugin and components for creating slide deck websites",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./plugins": {
-      "import": "./dist/plugins/index.js",
-      "types": "./dist/plugins/index.d.ts"
-    },
-    "./components": {
-      "import": "./dist/components/index.js",
-      "types": "./dist/components/index.d.ts"
-    },
+    ".": "./dist/index.js",
+    "./plugins": "./dist/plugins.js",
+    "./components": "./dist/components.js",
     "./styles": "./dist/styles/index.css"
   },
   "files": [

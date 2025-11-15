@@ -1,4 +1,2 @@
-// Main entry point
-export * from "./plugins/index.js";
+// Main entry point exposes Vue components by default.
 export * from "./components/index.js";
-
