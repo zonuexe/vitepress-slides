@@ -15,6 +15,7 @@ export default defineConfig({
         plugins: resolve(__dirname, "src/plugins/index.js"),
         components: resolve(__dirname, "src/components/index.js"),
         styles: resolve(__dirname, "src/styles/index.css"),
+        runtime: resolve(__dirname, "src/runtime/index.js"),
       },
       formats: ["es"],
     },

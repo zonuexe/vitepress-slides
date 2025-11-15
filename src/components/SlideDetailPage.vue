@@ -1,8 +1,8 @@
 <script setup>
 import { computed, onMounted, watch, nextTick } from "vue";
 import { withBase, useData } from "vitepress";
-import { slides, siteConfig } from "virtual:slides-data";
 import { buildEventNarratives } from "../lib/events.js";
+import { useSlidesData } from "../runtime/slides-data.js";
 import SlideTextNodes from "./SlideTextNodes.vue";
 
 const props = defineProps({
@@ -12,9 +12,11 @@ const props = defineProps({
   },
 });
 
+const { slides: providedSlides = [], siteConfig = {} } = useSlidesData();
+
 const { params } = useData();
 const activeSlug = computed(() => props.slug ?? params.value?.slug ?? "");
-const slide = computed(() => slides.find((entry) => entry.slug === activeSlug.value));
+const slide = computed(() => providedSlides.find((entry) => entry.slug === activeSlug.value));
 
 const japaneseDate = computed(() => {
   if (!slide.value?.date) return slide.value?.date ?? "";

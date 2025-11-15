@@ -1,10 +1,11 @@
 <script setup>
 import { computed, onMounted, ref, watch, shallowRef } from "vue";
-import { withBase } from "vitepress";
 import SlideCard from "./SlideCard.vue";
-import { slides, siteConfig } from "virtual:slides-data";
+import { useSlidesData } from "../runtime/slides-data.js";
 
-const allSlides = ref([...slides]);
+const { slides: providedSlides = [], siteConfig = {} } = useSlidesData();
+
+const allSlides = ref([...providedSlides]);
 
 const sortedSlides = computed(() => [...allSlides.value].sort((a, b) => new Date(b.date) - new Date(a.date)));
 
@@ -47,7 +48,7 @@ const filteredSlides = computed(() => {
 
 const totalCount = sortedSlides.value.length;
 const resultCount = computed(() => filteredSlides.value.length);
-const heroSubtitle = computed(() => siteConfig.site?.description ?? "Slide archive");
+const heroSubtitle = computed(() => siteConfig?.site?.description ?? "Slide archive");
 
 // Lazily load Fuse.js
 const loadFuse = async () => {

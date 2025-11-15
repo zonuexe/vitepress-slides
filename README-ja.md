@@ -53,6 +53,8 @@ import {
   SlideCard,
 } from "@zonuexe/vitepress-slides/components";
 import "@zonuexe/vitepress-slides/styles";
+import { slidesDataSymbol } from "@zonuexe/vitepress-slides/runtime";
+import { slides, siteConfig } from "virtual:slides-data";
 
 export default {
   ...DefaultTheme,
@@ -61,6 +63,7 @@ export default {
     ctx.app.component("SlidesCatalog", SlidesCatalog);
     ctx.app.component("SlideDetailPage", SlideDetailPage);
     ctx.app.component("SlideCard", SlideCard);
+    ctx.app.provide(slidesDataSymbol, { slides, siteConfig });
   },
 };
 ```

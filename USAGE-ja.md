@@ -53,6 +53,8 @@ import {
   SlideDetailPage,
 } from "@zonuexe/vitepress-slides/components";
 import "@zonuexe/vitepress-slides/styles";
+import { slidesDataSymbol } from "@zonuexe/vitepress-slides/runtime";
+import { slides, siteConfig } from "virtual:slides-data";
 
 export default {
   ...DefaultTheme,
@@ -60,11 +62,12 @@ export default {
     DefaultTheme.enhanceApp?.(ctx);
     ctx.app.component("SlidesCatalog", SlidesCatalog);
     ctx.app.component("SlideDetailPage", SlideDetailPage);
+    ctx.app.provide(slidesDataSymbol, { slides, siteConfig });
   },
 };
 ```
 
-`@zonuexe/vitepress-slides/styles` にはカタログUI向けのTailwindユーティリティとスライドビューア向けのセレクタが同梱されているため、ここで一度読み込むだけで必要なスタイルが適用されます。
+`@zonuexe/vitepress-slides/styles` にはカタログUI向けのTailwindユーティリティとスライドビューア向けのセレクタが同梱されているため、ここで一度読み込むだけで必要なスタイルが適用されます。また `slidesDataSymbol` を使って `slides`/`siteConfig` を `provide` し、パッケージ側のコンポーネントが `virtual:slides-data` の内容にアクセスできるようにします。
 
 ### 3. ページでの使用
 
