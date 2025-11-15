@@ -76,6 +76,10 @@ export default {
 
 The bundled stylesheet includes both the Tailwind utility layer for the catalog UI and the slide viewer styles (e.g. `slide-text-*`, `back-link`). Import `@zonuexe/vitepress-slides/styles` once from your custom theme entry as shown above, and make sure your VitePress project already has Tailwind/PostCSS configured so the directives in that file can be processed.
 
+### Example
+
+See `examples/vitepress/` for a minimal VitePress site wired to this package. It boots the catalog/detail components, runs the slide-data/pdf-assets/oembed plugins, and embeds the `examples/slide-pdf.js` viewer inside an `<iframe>`. Use it as a reference implementation when integrating into your own docs.
+
 ## API
 
 ### Plugins

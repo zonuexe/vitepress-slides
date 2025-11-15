@@ -1,0 +1,29 @@
+:root {
+  --page-text: #0f172a;
+  --panel-bg: rgba(255, 255, 255, 0.9);
+  --panel-border: rgba(15, 23, 42, 0.1);
+}
+
+.back-link {
+  text-align: right;
+  margin-top: 1rem;
+}
+
+.back-link .back-btn {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: #0f172a;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.slide-not-found {
+  border: 1px solid var(--panel-border);
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--panel-bg);
+  color: var(--page-text);
+}

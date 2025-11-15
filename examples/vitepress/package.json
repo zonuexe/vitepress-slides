@@ -1,0 +1,20 @@
+{
+  "name": "@zonuexe/vitepress-slides-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare-viewer": "pnpm --dir ../slide-pdf.js run build",
+    "predev": "pnpm run prepare-viewer",
+    "prebuild": "pnpm run prepare-viewer",
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "dependencies": {
+    "@zonuexe/vitepress-slides": "file:../..",
+    "github-fork-ribbon-css": "^0.2.3",
+    "js-yaml": "^4.1.0",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.13"
+  }
+}

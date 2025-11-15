@@ -1,0 +1,25 @@
+{
+  "site": {
+    "name": "VitePress Slides Example",
+    "description": "Minimal example site to verify the @zonuexe/vitepress-slides package.",
+    "url": ""
+  },
+  "author": {
+    "name": "Example Author",
+    "url": "/author",
+    "twitter": "@example"
+  },
+  "twitter": {
+    "site": "@example"
+  },
+  "oembed": {
+    "type": "rich",
+    "version": "1.0",
+    "provider_name": "Slides Example",
+    "provider_url": ""
+  },
+  "embed": {
+    "base_url": "/slide-pdf.js",
+    "slide_path": "/pdf"
+  }
+}

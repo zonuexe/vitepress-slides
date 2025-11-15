@@ -76,6 +76,10 @@ export default {
 
 本パッケージには、カタログUI用のTailwindユーティリティとスライドビューア用スタイル（`slide-text-*` や `back-link` など）をまとめたCSSが同梱されています。上記のように `@zonuexe/vitepress-slides/styles` をテーマエントリで一度読み込み、`@tailwind` ディレクティブを解決できるようプロジェクト側でTailwind/PostCSSを設定してください。
 
+### 例
+
+`examples/vitepress/` には最小構成のVitePressサイトがあり、このパッケージを使ったプラグイン設定や `<SlidesCatalog>` / `<SlideDetailPage>` の配置、`examples/slide-pdf.js` を `<iframe>` で読む手順を確認できます。自分のプロジェクトへ導入する際の参考にしてください。
+
 ## API
 
 ### プラグイン
