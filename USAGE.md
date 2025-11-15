@@ -62,12 +62,16 @@ export default {
     DefaultTheme.enhanceApp?.(ctx);
     ctx.app.component("SlidesCatalog", SlidesCatalog);
     ctx.app.component("SlideDetailPage", SlideDetailPage);
-    ctx.app.provide(slidesDataSymbol, { slides, siteConfig });
+    ctx.app.provide(slidesDataSymbol, {
+      slides,
+      siteConfig,
+      base: ctx.siteData?.base ?? "/",
+    });
   },
 };
 ```
 
-`@zonuexe/vitepress-slides/styles` bundles both the Tailwind utility layer and the slide viewer-specific selectors, so importing it once here applies all required styling. Provide the `slides`/`siteConfig` payload via `slidesDataSymbol` so packaged components can access the virtual module data.
+`@zonuexe/vitepress-slides/styles` bundles both the Tailwind utility layer and the slide viewer-specific selectors, so importing it once here applies all required styling. Provide the `slides`/`siteConfig` payload (and the current `base` path) via `slidesDataSymbol` so packaged components can access the virtual module data.
 
 ### 3. Using in Pages
 
@@ -88,7 +92,7 @@ layout: page
 layout: page
 ---
 
-<SlideDetailPage />
+<SlideDetailPage :slug="$params.slug" />
 ```
 
 ## Notes

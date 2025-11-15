@@ -63,7 +63,11 @@ export default {
     ctx.app.component("SlidesCatalog", SlidesCatalog);
     ctx.app.component("SlideDetailPage", SlideDetailPage);
     ctx.app.component("SlideCard", SlideCard);
-    ctx.app.provide(slidesDataSymbol, { slides, siteConfig });
+    ctx.app.provide(slidesDataSymbol, {
+      slides,
+      siteConfig,
+      base: ctx.siteData?.base ?? "/",
+    });
   },
 };
 ```

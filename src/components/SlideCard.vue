@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from "vue";
-import { withBase } from "vitepress";
+import { joinWithBase } from "../runtime/base.js";
+import { useSlidesData } from "../runtime/slides-data.js";
 
 const props = defineProps({
   slide: {
@@ -64,10 +65,12 @@ function highlightSnippet(snippet, query) {
     .join("");
 }
 
+const { base = "/" } = useSlidesData();
+
 const events = computed(() => props.slide.events ?? []);
 const hasEvents = computed(() => events.value.some((event) => event?.name));
 const tags = computed(() => props.slide.tags ?? []);
-const detailUrl = computed(() => withBase(`/${props.slide.slug}/`));
+const detailUrl = computed(() => joinWithBase(base, `/${props.slide.slug}/`));
 
 const trimmedQuery = computed(() => props.query.trim());
 const snippetText = computed(() => {

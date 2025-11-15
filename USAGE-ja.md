@@ -62,12 +62,16 @@ export default {
     DefaultTheme.enhanceApp?.(ctx);
     ctx.app.component("SlidesCatalog", SlidesCatalog);
     ctx.app.component("SlideDetailPage", SlideDetailPage);
-    ctx.app.provide(slidesDataSymbol, { slides, siteConfig });
+    ctx.app.provide(slidesDataSymbol, {
+      slides,
+      siteConfig,
+      base: ctx.siteData?.base ?? "/",
+    });
   },
 };
 ```
 
-`@zonuexe/vitepress-slides/styles` にはカタログUI向けのTailwindユーティリティとスライドビューア向けのセレクタが同梱されているため、ここで一度読み込むだけで必要なスタイルが適用されます。また `slidesDataSymbol` を使って `slides`/`siteConfig` を `provide` し、パッケージ側のコンポーネントが `virtual:slides-data` の内容にアクセスできるようにします。
+`@zonuexe/vitepress-slides/styles` にはカタログUI向けのTailwindユーティリティとスライドビューア向けのセレクタが同梱されているため、ここで一度読み込むだけで必要なスタイルが適用されます。また `slidesDataSymbol` を使って `slides`/`siteConfig`/`base` を `provide` し、パッケージ側のコンポーネントが `virtual:slides-data` の内容やサイトのベースパスにアクセスできるようにします。
 
 ### 3. ページでの使用
 
@@ -88,7 +92,7 @@ layout: page
 layout: page
 ---
 
-<SlideDetailPage />
+<SlideDetailPage :slug="$params.slug" />
 ```
 
 ## 注意事項

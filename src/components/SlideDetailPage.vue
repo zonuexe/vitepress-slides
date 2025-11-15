@@ -1,8 +1,8 @@
 <script setup>
 import { computed, onMounted, watch, nextTick } from "vue";
-import { withBase, useData } from "vitepress";
 import { buildEventNarratives } from "../lib/events.js";
 import { useSlidesData } from "../runtime/slides-data.js";
+import { joinWithBase } from "../runtime/base.js";
 import SlideTextNodes from "./SlideTextNodes.vue";
 
 const props = defineProps({
@@ -12,10 +12,10 @@ const props = defineProps({
   },
 });
 
-const { slides: providedSlides = [], siteConfig = {} } = useSlidesData();
+const { slides: providedSlides = [], siteConfig = {}, base = "/" } = useSlidesData();
+const resolveBasePath = (path = "/") => joinWithBase(base, path);
 
-const { params } = useData();
-const activeSlug = computed(() => props.slug ?? params.value?.slug ?? "");
+const activeSlug = computed(() => props.slug ?? "");
 const slide = computed(() => providedSlides.find((entry) => entry.slug === activeSlug.value));
 
 const japaneseDate = computed(() => {
@@ -27,26 +27,28 @@ const japaneseDate = computed(() => {
   return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
 });
 
-const slidePermalink = computed(() => (slide.value ? withBase(`/${slide.value.slug}/`) : withBase("/")));
-const slidesIndexUrl = computed(() => withBase("/"));
+const slidePermalink = computed(() =>
+  slide.value ? resolveBasePath(`/${slide.value.slug}/`) : resolveBasePath("/")
+);
+const slidesIndexUrl = computed(() => resolveBasePath("/"));
 
 const downloadUrl = computed(() => {
   if (!slide.value) return "#";
-  return withBase(`/${slide.value.file}`);
+  return resolveBasePath(`/${slide.value.file}`);
 });
 
 const embedBaseUrl = computed(() => {
   if (import.meta.env.DEV) {
-    return withBase("/slide-pdf.js").replace(/\/$/, "");
+    return resolveBasePath("/slide-pdf.js").replace(/\/$/, "");
   }
-  const base = siteConfig.embed?.base_url ?? withBase("/slide-pdf.js");
-  return base.replace(/\/$/, "");
+  const embedBase = siteConfig.embed?.base_url ?? resolveBasePath("/slide-pdf.js");
+  return embedBase.replace(/\/$/, "");
 });
 
 const slideSourceUrl = computed(() => {
   if (!slide.value) return "";
   if (import.meta.env.DEV) {
-    return withBase(`/${slide.value.file}`);
+    return resolveBasePath(`/${slide.value.file}`);
   }
   const slidePathBase = siteConfig.embed?.slide_path ?? `${siteConfig.site?.url ?? ""}/slides/pdf`;
   const normalizedBase = slidePathBase.replace(/\/$/, "");
